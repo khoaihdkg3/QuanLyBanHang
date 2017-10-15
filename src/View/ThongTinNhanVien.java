@@ -1,6 +1,6 @@
 package View;
-public class GiaoDienNhanVien extends javax.swing.JPanel {
-    public GiaoDienNhanVien() {
+public class ThongTinNhanVien extends javax.swing.JPanel {
+    public ThongTinNhanVien() {
         initComponents();
     }
     @SuppressWarnings("unchecked")
