@@ -16,6 +16,7 @@ public class SanPham {
     private LoaiSanPham loai;
     private NhaCungCap ncc[];
     private KhuyenMai km[];
+    private float DonGiaBan;
     public SanPham(String ma, String ten) {
         this.ma = ma;
         this.ten = ten;
@@ -44,6 +45,10 @@ public class SanPham {
     public LoaiSanPham getLoai() {
         return loai;
     }
+
+    public float getDonGiaBan() {
+        return DonGiaBan;
+    }
     
     public void setMa(String str) {
         ma = str;
@@ -67,6 +72,10 @@ public class SanPham {
 
     public void setLoai(LoaiSanPham loai) {
         this.loai = loai;
+    }
+
+    public void setDonGiaBan(float DonGiaBan) {
+        this.DonGiaBan = DonGiaBan;
     }
     
 }

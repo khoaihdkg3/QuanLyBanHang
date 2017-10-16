@@ -15,18 +15,18 @@ import java.util.Date;
 public class SanPhamNhap {
     private SanPham SanPham;
     private Date NgayNhap;
-    private float DonGia;
+    private float DonGiaNhap;
     private int SoLuong;
 
-    public SanPhamNhap(SanPham SanPham, Date NgayNhap, float DonGia, int SoLuong) {
+    public SanPhamNhap(SanPham SanPham, Date NgayNhap, float DonGiaNhap, int SoLuong) {
         this.SanPham = SanPham;
         this.NgayNhap = NgayNhap;
-        this.DonGia = DonGia;
+        this.DonGiaNhap = DonGiaNhap;
         this.SoLuong = SoLuong;
     }
 
-    public float getDonGia() {
-        return DonGia;
+    public float getDonGiaNhap() {
+        return DonGiaNhap;
     }
 
     public Date getNgayNhap() {
@@ -41,8 +41,8 @@ public class SanPhamNhap {
         return SoLuong;
     }
 
-    public void setDonGia(float DonGia) {
-        this.DonGia = DonGia;
+    public void setDonGiaNhap(float DonGiaNhap) {
+        this.DonGiaNhap = DonGiaNhap;
     }
 
     public void setNgayNhap(Date NgayNhap) {

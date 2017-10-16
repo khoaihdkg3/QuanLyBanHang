@@ -1,20 +1,9 @@
-
-import View.GiaoDienChinh;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author THINH
- */
+import View.GiaoDienChinhView;
 public class main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
-            new GiaoDienChinh().setVisible(true);
+            GiaoDienChinhView view  = new GiaoDienChinhView();
+            view.setVisible(true);
         });
     }
 }

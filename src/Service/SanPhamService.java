@@ -5,7 +5,6 @@
  */
 package Service;
 
-import Interface.SanPhamService;
 import Model.KhuyenMai;
 import Model.NhaCungCap;
 import Model.SanPham;
@@ -16,46 +15,50 @@ import java.util.Date;
  *
  * @author THINH
  */
-public class SanPhamServiceImpl implements SanPhamService{
+public class SanPhamService {
 
-    @Override
+    private static SanPhamService Instance = null;
+
+    private SanPhamService() {
+    }
+
+    public static SanPhamService getInstance() {
+        if (Instance == null) {
+            Instance = new SanPhamService();
+        }
+        return Instance;
+    }
+
     public SanPham[] getAllSanPham() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public boolean updateSanPham(SanPham sanpham) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public KhuyenMai[] getKhuyenMaiByDate(Date ngaybatdau, Date ngayketthuc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public NhaCungCap[] getAllNhaCungCap() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public boolean addNhaCungCap() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public boolean updateNhaCungCap(NhaCungCap nhacungcap) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public SanPhamNhap[] getSanPhamNhapBySanPham(SanPham sanpham) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public SanPhamNhap[] getSanPhamNhapByDate(Date ngaybatdau, Date ngayketthuc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
