@@ -1,27 +1,15 @@
 package View;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UnsupportedLookAndFeelException;
-public class GiaoDienChinhView extends Viewer {
 
-    public GiaoDienChinhView() {
+import Model.NhanVien;
+
+public class GiaoDienChinhView extends Viewer {
+    private final DangNhapView DangNhapView;
+    public GiaoDienChinhView(DangNhapView view) {
         super();
-        applyWindowTheme();
         initComponents();
         initSubView();
-    }
-
-    private void applyWindowTheme() {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initModel();
+        this.DangNhapView = view;
     }
 
     private void initSubView() {
@@ -33,9 +21,15 @@ public class GiaoDienChinhView extends Viewer {
         TaoVaiTroView = new TaoVaiTroView(this);
         ThongTinNhanVienView = new ThongTinNhanVienView(this);
     }
-
-
-
+    private void initModel(){
+        
+    }
+    public void updateNhanVien(NhanVien nhanvien){
+        String TenNhanVien = nhanvien.getTen();
+        String MaNhanVien = nhanvien.getMa();
+        jTextField_ttnhanvien_bh.setText(TenNhanVien+"-"+MaNhanVien);
+        currentNhanVien = nhanvien;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,6 +38,7 @@ public class GiaoDienChinhView extends Viewer {
         jPanel17 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
         jButton_profile = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jButton_dangxuat = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -117,6 +112,7 @@ public class GiaoDienChinhView extends Viewer {
         jPanel9 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý bán rau củ quả");
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -137,6 +133,17 @@ public class GiaoDienChinhView extends Viewer {
             }
         });
         jToolBar2.add(jButton_profile);
+
+        jButton1.setText("Nhân Viên");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton1);
 
         jButton_dangxuat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton_dangxuat.setText("Đăng xuất");
@@ -193,9 +200,9 @@ public class GiaoDienChinhView extends Viewer {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 322, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jTextField_timkiem_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -229,7 +236,7 @@ public class GiaoDienChinhView extends Viewer {
         jFormattedTextField_tongtien_bh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jFormattedTextField_tiennhan_bh.setForeground(new java.awt.Color(0, 153, 0));
-        jFormattedTextField_tiennhan_bh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        jFormattedTextField_tiennhan_bh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###"))));
         jFormattedTextField_tiennhan_bh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jFormattedTextField_tientra_bh.setEditable(false);
@@ -328,7 +335,7 @@ public class GiaoDienChinhView extends Viewer {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -429,7 +436,7 @@ public class GiaoDienChinhView extends Viewer {
                     .addComponent(jButton_xuathd_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_xoatatcahd_bh))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel4);
@@ -482,9 +489,9 @@ public class GiaoDienChinhView extends Viewer {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(0, 322, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jTextField_timkiem_spn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -564,7 +571,7 @@ public class GiaoDienChinhView extends Viewer {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_xoasp_spn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -600,7 +607,7 @@ public class GiaoDienChinhView extends Viewer {
                     .addComponent(jButton_xoasp_spn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_xoatatca_spn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
         );
 
         jPanel12.add(jPanel15);
@@ -677,7 +684,7 @@ public class GiaoDienChinhView extends Viewer {
                 .addComponent(jButton_xem_hd, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_in_hd, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                 .addComponent(jTextField_timkiem_hd, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -717,6 +724,12 @@ public class GiaoDienChinhView extends Viewer {
         QuanLyView.setVisible(true);
         this.setEnabled(false);
     }//GEN-LAST:event_jButton_profileActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ThongTinNhanVienView.updateNhanVien(currentNhanVien);
+        ThongTinNhanVienView.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
     private QuanLyView QuanLyView;
     private SuaNhanVienView SuaNhanVienView;
     private TaoNhaCungCapView TaoNhaCungCapView;
@@ -724,8 +737,9 @@ public class GiaoDienChinhView extends Viewer {
     private TaoTaiKhoanView TaoTaiKhoanView;
     private TaoVaiTroView TaoVaiTroView;
     private ThongTinNhanVienView ThongTinNhanVienView;
-
+    private NhanVien currentNhanVien;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_dangxuat;
     private javax.swing.JButton jButton_in_hd;
     private javax.swing.JButton jButton_profile;

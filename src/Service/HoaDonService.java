@@ -26,15 +26,16 @@ public class HoaDonService {
         }
         return Instance;
     }
-
+    //lưu lại hóa đơn vào csdl, hóa đơn gửi từ view qua.
+    //thành công return true, ko thành công return false;
     public boolean saveHoaDon(HoaDon hoadon) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    //lấy hóa đơn bằng cách so sánh ngaybatdau và ngayketthuc
     public HoaDon[] getHoaDonByDate(Date ngaybatdau, Date ngayketthuc) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    //lấy hoa đơn bằng cách so sánh mã nhân viên tạo ra hóa đơn đó.
     public HoaDon[] getHoaDonByNhanVien(NhanVien nhanvien) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

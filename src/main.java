@@ -1,8 +1,8 @@
-import View.GiaoDienChinhView;
+import View.DangNhapView;
 public class main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
-            GiaoDienChinhView view  = new GiaoDienChinhView();
+            DangNhapView view  = new DangNhapView();
             view.setVisible(true);
         });
     }

@@ -60,6 +60,10 @@ public class NhanVien {
     public VaiTro getVaiTro() {
         return VaiTro;
     }
+
+    public String getSoTaiKhoan() {
+        return stk;
+    }
     
     public void setMa(String ma) {
         this.ma = ma;

@@ -1580,8 +1580,8 @@ Shadow=0</a:DisplayPreferences>
 <o:RelationshipSymbol Id="o7">
 <a:CreationDate>1505898413</a:CreationDate>
 <a:ModificationDate>1507689821</a:ModificationDate>
-<a:Rect>((-5441,-228), (1309,7962))</a:Rect>
-<a:ListOfPoints>((-720,7962),(-720,6336),(-3087,6336),(-2648,-228))</a:ListOfPoints>
+<a:Rect>((-5059,-228), (1691,7962))</a:Rect>
+<a:ListOfPoints>((-720,7962),(-720,6336),(-2648,6336),(-2648,-228))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4628</a:ArrowStyle>
 <a:LineColor>11184640</a:LineColor>
@@ -1624,8 +1624,8 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:RelationshipSymbol Id="o15">
 <a:CreationDate>1506172104</a:CreationDate>
 <a:ModificationDate>1507689813</a:ModificationDate>
-<a:Rect>((-13707,-10705), (-7183,-1550))</a:Rect>
-<a:ListOfPoints>((-10338,-10705),(-10338,-5852),(-10853,-5852),(-11259,-1550))</a:ListOfPoints>
+<a:Rect>((-14060,-10705), (-7536,-1550))</a:Rect>
+<a:ListOfPoints>((-10338,-10705),(-10338,-5852),(-11259,-5852),(-11259,-1550))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>5140</a:ArrowStyle>
 <a:LineColor>11184640</a:LineColor>
@@ -1646,7 +1646,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:RelationshipSymbol Id="o18">
 <a:CreationDate>1507083994</a:CreationDate>
 <a:ModificationDate>1507689824</a:ModificationDate>
-<a:Rect>((-23623,-2117), (-13258,7128))</a:Rect>
+<a:Rect>((-23623,-2215), (-13258,7128))</a:Rect>
 <a:ListOfPoints>((-13258,-969),(-18861,-969),(-18861,7128))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4883</a:ArrowStyle>
@@ -1669,8 +1669,8 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <a:CreationDate>1507084291</a:CreationDate>
 <a:ModificationDate>1507689840</a:ModificationDate>
 <a:CenterTextOffset>(4863, 973)</a:CenterTextOffset>
-<a:Rect>((651,-10282), (12523,-1534))</a:Rect>
-<a:ListOfPoints>((1497,-1534),(651,-10282),(12523,-10282))</a:ListOfPoints>
+<a:Rect>((1497,-10282), (12523,-1534))</a:Rect>
+<a:ListOfPoints>((1497,-1534),(1497,-10282),(12523,-10282))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4632</a:ArrowStyle>
 <a:LineColor>11184640</a:LineColor>
@@ -1737,8 +1737,8 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <a:CreationDate>1507088535</a:CreationDate>
 <a:ModificationDate>1507689919</a:ModificationDate>
 <a:CenterTextOffset>(194, -3480)</a:CenterTextOffset>
-<a:Rect>((-5888,-18774), (1462,-2234))</a:Rect>
-<a:ListOfPoints>((-2230,-2234),(-2710,-8487),(-1749,-8487),(-1889,-18774))</a:ListOfPoints>
+<a:Rect>((-5540,-18774), (1810,-2234))</a:Rect>
+<a:ListOfPoints>((-2230,-2234),(-2230,-8487),(-1889,-8487),(-1889,-18774))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>4632</a:ArrowStyle>
 <a:LineColor>11184640</a:LineColor>
@@ -1760,7 +1760,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <a:CreationDate>1507088918</a:CreationDate>
 <a:ModificationDate>1507689855</a:ModificationDate>
 <a:CenterTextOffset>(-800, 0)</a:CenterTextOffset>
-<a:Rect>((-2250,28266), (10205,30312))</a:Rect>
+<a:Rect>((-2250,28266), (10205,29866))</a:Rect>
 <a:ListOfPoints>((10205,29632),(4428,29632),(4428,28500),(-2250,28500))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>5139</a:ArrowStyle>
