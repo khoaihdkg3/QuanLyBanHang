@@ -1,6 +1,9 @@
 package View;
 
 import Model.NhanVien;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DangNhapView extends Viewer {
 
@@ -112,32 +115,40 @@ public class DangNhapView extends Viewer {
     public void resetAccountFieldIfHasText() {
         jPasswordField_mk.setText("");
         jTextField_tk.setText("");
-        if(!"".equals(jLabel_error.getText())) jLabel_error.setText("");
+        if (!"".equals(jLabel_error.getText())) {
+            jLabel_error.setText("");
+        }
 
     }
-    
+
     private NhanVien currentNhanVien;
+
     private void success() {
         GiaoDienChinhView GiaoDienChinhView = new GiaoDienChinhView(this);
         GiaoDienChinhView.updateNhanVien(currentNhanVien);
         GiaoDienChinhView.setVisible(true);
         this.setVisible(false);
     }
-    private void error() {
-        jLabel_error.setText("Lỗi đăng nhập.");
+
+    private void error(String text) {
+        jLabel_error.setText(text);
     }
     private void jButton_dangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_dangnhapActionPerformed
-        
+
         String username = jTextField_tk.getText();
         String password = new String(jPasswordField_mk.getPassword());
-        currentNhanVien = NhanVienService.loginAccount(username, password);
-        resetAccountFieldIfHasText();
+        try {
+            currentNhanVien = NhanVienService.loginAccount(username, password);
+            resetAccountFieldIfHasText();
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.err.println("loginAccount Exception: " + ex);
+        }
         if (currentNhanVien != null) {
             success();
         } else {
-            error();
+            error("Lỗi đăng nhập.");
         }
-        
+
     }//GEN-LAST:event_jButton_dangnhapActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_dangnhap;

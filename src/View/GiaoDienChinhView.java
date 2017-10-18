@@ -27,7 +27,7 @@ public class GiaoDienChinhView extends Viewer {
     public void updateNhanVien(NhanVien nhanvien){
         String TenNhanVien = nhanvien.getTen();
         String MaNhanVien = nhanvien.getMa();
-        jTextField_ttnhanvien_bh.setText(TenNhanVien+"-"+MaNhanVien);
+        jTextField_ttnhanvien_bh.setText(TenNhanVien);
         currentNhanVien = nhanvien;
     }
     @SuppressWarnings("unchecked")

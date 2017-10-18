@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.ResultSet;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -104,5 +106,11 @@ public class NhanVien {
     public void setVaiTro(VaiTro VaiTro) {
         this.VaiTro = VaiTro;
     }
+
+    @Override
+    public String toString() {
+        return ma+"|"+ten+"|"+diachi+"|"+sdt+"|"+email+"|"+stk+"|"+matkhau+"|"+tentk+"|"+GioiTinh;
+    }
+    
     
 }

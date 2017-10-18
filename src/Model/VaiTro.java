@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,10 +14,11 @@ package Model;
  */
 public class VaiTro {
     private String ma, ten;
-    private Quyen quyen[];
+    private ArrayList<Quyen> quyenList;
     public VaiTro(String ma, String ten) {
         this.ma = ma;
         this.ten = ten;
+        quyenList = new ArrayList<>();
     }
     public String getMa(){
         return ma;
@@ -24,8 +27,8 @@ public class VaiTro {
         return ten;
     }
 
-    public Quyen[] getQuyen() {
-        return quyen;
+    public ArrayList<Quyen> getQuyen() {
+        return quyenList;
     }
     
     public void setMa(String str){
@@ -35,8 +38,16 @@ public class VaiTro {
         ten = str;
     }
 
-    public void setQuyen(Quyen[] quyen) {
-        this.quyen = quyen;
+    public void setQuyenList(ArrayList<Quyen> quyenList) {
+        this.quyenList = quyenList;
+    }
+    public void addQuyen(Quyen quyen){
+        quyenList.add(quyen);
+    }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getTen();
     }
     
 }

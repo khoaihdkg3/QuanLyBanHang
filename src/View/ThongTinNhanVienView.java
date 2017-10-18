@@ -1,6 +1,9 @@
 package View;
 
 import Model.NhanVien;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ThongTinNhanVienView extends SubViewer {
 
@@ -222,11 +225,15 @@ public class ThongTinNhanVienView extends SubViewer {
     }
 
     private void jButton_thaydoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_thaydoiActionPerformed
-        resetErrorText();
-        if (NhanVienService.updateNhanVien(currentNhanVien)) {
-            success();
-        } else {
-            error();
+        try {
+            resetErrorText();
+            if (NhanVienService.updateNhanVien(currentNhanVien)) {
+                success();
+            } else {
+                error();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ThongTinNhanVienView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton_thaydoiActionPerformed
     public void updateNhanVien(NhanVien nhanvien) {

@@ -29,4 +29,10 @@ public class Quyen {
     public void setDienGiai(String str){
         diengiai = str;
     }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getDienGiai();
+    }
+    
 }
