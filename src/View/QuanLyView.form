@@ -243,7 +243,7 @@
                                 <Column editable="false" title="M&#xe3;" type="java.lang.Object"/>
                                 <Column editable="false" title="T&#xea;n" type="java.lang.Object"/>
                                 <Column editable="false" title="Lo&#x1ea1;i" type="java.lang.Object"/>
-                                <Column editable="false" title="&#x110;&#x1a1;n v&#x1ecb; t&#xed;nh" type="java.lang.Object"/>
+                                <Column editable="false" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>

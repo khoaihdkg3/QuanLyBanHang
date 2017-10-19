@@ -56,4 +56,10 @@ public class SanPhamNhap {
     public void setSoLuong(int SoLuong) {
         this.SoLuong = SoLuong;
     }
+
+    @Override
+    public String toString() {
+        return getSanPham().getMa()+"|"+getNgayNhap()+"|"+getDonGiaNhap()+"|"+getSoLuong();
+    }
+    
 }

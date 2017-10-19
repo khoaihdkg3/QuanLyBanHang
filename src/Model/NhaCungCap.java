@@ -88,4 +88,10 @@ public class NhaCungCap {
     public void setSoTaiKhoan(String str) {
         sotaikhoan = str;
     }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getTen()+"|"+getDiaChi()+"|"+getSoDienThoai()+"|"+getSoDienThoai()+"|"+getSoFax()+"|"+getNguoiLienHe();
+    }
+    
 }

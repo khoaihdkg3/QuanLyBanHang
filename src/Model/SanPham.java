@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,8 +16,8 @@ public class SanPham {
 
     private String ma, ten;
     private LoaiSanPham loai;
-    private NhaCungCap ncc[];
-    private KhuyenMai km[];
+    private ArrayList<NhaCungCap> nccList;
+    private ArrayList<KhuyenMai> kmList;
     private float DonGiaBan;
     public SanPham(String ma, String ten) {
         this.ma = ma;
@@ -34,18 +36,13 @@ public class SanPham {
         return loai;
     }
 
-    public NhaCungCap[] getNhaCungCap() {
-        return ncc;
+    public ArrayList<NhaCungCap> getNhaCungCap() {
+        return nccList;
     }
 
-    public KhuyenMai[] getKhuyenMai() {
-        return km;
+    public ArrayList<KhuyenMai> getKhuyenMai() {
+        return kmList;
     }
-
-    public LoaiSanPham getLoai() {
-        return loai;
-    }
-
     public float getDonGiaBan() {
         return DonGiaBan;
     }
@@ -58,24 +55,26 @@ public class SanPham {
         ten = str;
     }
 
-    public void setLoaiSanPhan(LoaiSanPham loai) {
+    public void setLoaiSanPham(LoaiSanPham loai) {
         this.loai = loai;
     }
 
-    public void setNhaCungCap(NhaCungCap[] ncc) {
-        this.ncc = ncc;
+    public void setNhaCungCap(ArrayList<NhaCungCap> nccList) {
+        this.nccList = nccList;
     }
 
-    public void setKhuyenMai(KhuyenMai[] km) {
-        this.km = km;
-    }
-
-    public void setLoai(LoaiSanPham loai) {
-        this.loai = loai;
+    public void setKhuyenMai(ArrayList<KhuyenMai> kmList) {
+        this.kmList = kmList;
     }
 
     public void setDonGiaBan(float DonGiaBan) {
         this.DonGiaBan = DonGiaBan;
     }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getTen()+"|"+getDonGiaBan();
+    }
+    
     
 }

@@ -142,7 +142,7 @@ public class QuanLyView extends SubViewer {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã", "Tên", "Loại", "Đơn vị tính"
+                "Mã", "Tên", "Loại", "Đơn giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {

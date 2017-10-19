@@ -43,4 +43,10 @@ public class LoaiSanPham {
     public void setDonViTinh(String str) {
         dvt = str;
     }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getTen()+"|"+getDonViTinh();
+    }
+    
 }

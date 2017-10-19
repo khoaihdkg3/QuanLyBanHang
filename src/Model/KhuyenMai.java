@@ -1,7 +1,8 @@
 package Model;
 
+import java.sql.Date;
 
-import java.util.Date;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -61,4 +62,10 @@ public class KhuyenMai {
     public void setDonVi(float i){
         donvi = i;
     }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getNgayBatDau().toString()+"|"+getNgayKetThuc().toString()+"|"+getHinhThuc()+"|"+getDonVi();
+    }
+    
 }
