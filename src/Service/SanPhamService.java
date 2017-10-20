@@ -28,6 +28,21 @@ public class SanPhamService {
         return Instance;
     }
 
+    public SanPham getSanPhamByMaSanPham(String ma_sp) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT loaisanpham.LSP_MA, SP_MA, SP_TEN, SP_DONGIA, loaisanpham.LSP_DVT, loaisanpham.LSP_TEN "
+                + "FROM `sanpham`, `loaisanpham` WHERE sanpham.LSP_MA = loaisanpham.LSP_MA and sp_ma = ?";
+        PreparedStatement pStatement = Database.getInstance().prepareStatement(sql);
+        pStatement.setString(1, ma_sp);
+        ResultSet resultSet = pStatement.executeQuery();
+        if (resultSet.next()) {
+            SanPham sanpham = ResultSet_toSanPham(resultSet);
+            return sanpham;
+        } else {
+            return null;
+        }
+
+    }
+
     public ArrayList<SanPham> getAllSanPham() throws ClassNotFoundException, SQLException {
         String sql = "SELECT loaisanpham.LSP_MA, SP_MA, SP_TEN, SP_DONGIA, loaisanpham.LSP_DVT, loaisanpham.LSP_TEN "
                 + "FROM `sanpham`, `loaisanpham` WHERE sanpham.LSP_MA = loaisanpham.LSP_MA";
@@ -245,60 +260,7 @@ public class SanPhamService {
         return spn;
     }
 
-    public Date createDate(String year, String month, String day){
-        return Date.valueOf(year+"-"+month+"-"+day);
-    }
-    public static void main(String[] args) {
-        SanPhamService service = SanPhamService.getInstance();
-        try {
-            ArrayList<SanPham> sanphamList = service.getAllSanPham();
-            for (SanPham sp : sanphamList) {
-                System.out.println(sp.toString());
-                System.out.println(sp.getNhaCungCap());
-
-            }
-            System.out.println("----------------------");
-            //SanPham sanpham = sanphamList.get(0);
-            //sanpham.setTen("XX");
-            //sanpham.setDonGiaBan(1500);
-            //System.out.println("Changed : " + service.updateSanPham(sanpham));
-
-            ArrayList<KhuyenMai> kmList = service.getKhuyenMaiToday();
-            for (KhuyenMai km : kmList) {
-                System.out.println(km.toString());
-
-            }
-            System.out.println("----------------------");
-
-            Date ngaybatdau = Date.valueOf("2017-10-18");
-            Date ngayketthuc = Date.valueOf("2017-10-30");
-
-            kmList = service.getKhuyenMaiByDate(ngaybatdau, ngayketthuc);
-            for (KhuyenMai km : kmList) {
-                System.out.println(km.toString());
-            }
-            System.out.println("----------------------");
-
-            //NhaCungCap ncc = new NhaCungCap("", "XX", "XX", "XX", "XXX", "XXX", "XXX", "xxx");
-            //System.out.println(service.addNhaCungCap(ncc));
-            //ncc.setDiaChi("abc");
-            //ncc.setNguoiLienHe("anh A");
-            //System.out.println(service.updateNhaCungCap(ncc));
-            ArrayList<LoaiSanPham> lspList = service.getAllLoaiSanPham();
-            for (LoaiSanPham lsp : lspList) {
-                System.out.println(lsp.toString());
-
-            }
-            ngaybatdau = service.createDate("2017","10","18");
-            ngayketthuc = service.createDate("2017","10","19");
-            String ma_sanpham = "001";
-            ArrayList<SanPhamNhap> spnList = service.getSanPhamNhapByDate(ngaybatdau, ngayketthuc, ma_sanpham);
-            for (SanPhamNhap spn : spnList) {
-                System.out.println(spn.toString());
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(SanPhamService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    public Date createDate(String year, String month, String day) {
+        return Date.valueOf(year + "-" + month + "-" + day);
     }
 }

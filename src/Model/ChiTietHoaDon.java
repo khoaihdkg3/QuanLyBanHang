@@ -42,4 +42,10 @@ public class ChiTietHoaDon {
     public void setTongTien(float TongTien) {
         this.TongTien = TongTien;
     }
+
+    @Override
+    public String toString() {
+        return getSanPham()+"|"+getSoLuong()+"|"+getTongTien();
+    }
+    
 }

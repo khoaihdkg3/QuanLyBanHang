@@ -1,7 +1,9 @@
 package Model;
 
+import java.sql.Date;
+import java.util.ArrayList;
 
-import java.util.Date;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,13 +19,10 @@ public class HoaDon {
     private String ma;
     private Date ThoiGianLap;
     private NhanVien NhanVien;
-    private ChiTietHoaDon[] ChiTietHoaDon;
+    private ArrayList<ChiTietHoaDon> ChiTietHoaDon;
 
-    public HoaDon(String ma, Date ThoiGianLap, NhanVien NhanVien, ChiTietHoaDon[] ChiTietHoaDon) {
-        this.ma = ma;
-        this.ThoiGianLap = ThoiGianLap;
+    public HoaDon(NhanVien NhanVien) {
         this.NhanVien = NhanVien;
-        this.ChiTietHoaDon = ChiTietHoaDon;
     }
     
     public String getMa() {
@@ -38,7 +37,7 @@ public class HoaDon {
         return ThoiGianLap;
     }
 
-    public ChiTietHoaDon[] getChiTietHoaDon() {
+    public ArrayList<ChiTietHoaDon> getChiTietHoaDon() {
         return ChiTietHoaDon;
     }
     
@@ -54,8 +53,13 @@ public class HoaDon {
         this.ThoiGianLap = ThoiGianLap;
     }
 
-    public void setChiTietHoaDon(ChiTietHoaDon[] ChiTietHoaDon) {
+    public void setChiTietHoaDon(ArrayList<ChiTietHoaDon> ChiTietHoaDon) {
         this.ChiTietHoaDon = ChiTietHoaDon;
+    }
+
+    @Override
+    public String toString() {
+        return getMa()+"|"+getThoiGianLap();
     }
     
 }

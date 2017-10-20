@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Service;
-
 import Model.NhanVien;
 import Model.Quyen;
 import Model.VaiTro;
@@ -12,13 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-/**
- *
- * @author THINH
- */
 public class NhanVienService {
 
     private static NhanVienService Instance = null;
@@ -32,8 +19,6 @@ public class NhanVienService {
         }
         return Instance;
     }
-
-    //lấy tất cả nhân viên từ csdl
     public ArrayList<NhanVien> getAllNhanVien() throws ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM `nhanvien`";
         PreparedStatement pStatement = (PreparedStatement) Database.getInstance().prepareStatement(sql);
@@ -46,7 +31,6 @@ public class NhanVienService {
         return nhanvienList;
     }
 
-    //kiểm tra tên tk, mật khẩu trùng với nhân viên nào, thì return nhanvien đó.
     public NhanVien loginAccount(String username, String password) throws ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM `nhanvien` WHERE NV_TENTK = ? and NV_MATKHAU = ?";
         PreparedStatement pStatement = (PreparedStatement) Database.getInstance().prepareStatement(sql);
@@ -59,7 +43,6 @@ public class NhanVienService {
             return null;
         }
     }
-
     public NhanVien ResultSet_toNhanVien(ResultSet rs) throws SQLException, ClassNotFoundException {
         String ma = rs.getString("nv_ma");
         String ten = rs.getString("nv_ten");
@@ -77,9 +60,6 @@ public class NhanVienService {
         nhanvien.setVaiTro(vaitro);
         return nhanvien;
     }
-
-    //tạo tên tk, mật khẩu, các thông tin khác để trống.
-    //thành công return true, ko thành công return false;
     public boolean createNewAccount(NhanVien nhanvien) throws ClassNotFoundException, SQLException {
         String sql = "INSERT INTO `nhanvien` "
                 + "(`NV_MA`, `VT_MA`, `NV_TEN`, `NV_DIACHI`, `NV_SDT`, `NV_EMAIL`, `NV_GIOITINH`, `NV_STK`, `NV_MATKHAU`, `NV_TENTK`) "
@@ -102,9 +82,6 @@ public class NhanVienService {
         pStatement.execute();
         return currentMaNhanVien;
     }
-    
-    //cập nhật thông tin nhân viên = mã nhân viên.
-    //thành công return true, ko thành công return false;
     public boolean updateNhanVien(NhanVien nhanvien) throws ClassNotFoundException, SQLException {
         String sql = "UPDATE `nhanvien` SET " +
                 "`NV_TEN`=?," +
@@ -122,12 +99,9 @@ public class NhanVienService {
         pStatement.setInt(6, Integer.parseInt(nhanvien.getMa()));
         return pStatement.executeUpdate() > 0;
     }
-
-    //lấy tất cả vai trò từ csdl
     public ArrayList<VaiTro> getAllVaiTro() throws ClassNotFoundException, SQLException {
         return getVaiTro("*");
     }
-
     public ArrayList<VaiTro> getVaiTro(String ma_timkiem) throws ClassNotFoundException, SQLException {
         String adding_sql = "";
         if (!ma_timkiem.equals("*")) {
@@ -151,7 +125,6 @@ public class NhanVienService {
         }
         return vaitroList;
     }
-
     public VaiTro searchVaiTroInList_CreateNewIfNotExist(ArrayList<VaiTro> vaitroList, String ma_vt) {
         for (VaiTro vaitro : vaitroList) {
             if (vaitro.getMa().equals(ma_vt)) {
@@ -162,8 +135,6 @@ public class NhanVienService {
         vaitroList.add(vaitro);
         return vaitro;
     }
-
-    //lấy tất cả quyền từ csdl
     public ArrayList<Quyen> getAllQuyen() throws ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM `quyen`";
         PreparedStatement pStatement = (PreparedStatement) Database.getInstance().prepareStatement(sql);
@@ -175,16 +146,12 @@ public class NhanVienService {
         }
         return quyenList;
     }
-
     public Quyen ResultSet_toQuyen(ResultSet rs) throws SQLException {
         String ma = rs.getString("quyen_ma");
         String diengiai = rs.getString("quyen_diengiai");
         Quyen quyen = new Quyen(ma, diengiai);
         return quyen;
     }
-
-    // cập nhật vai trò = mã vai trò
-    //thành công return true, ko thành công return false;
     public boolean updateVaiTro(VaiTro vaitro) throws SQLException, ClassNotFoundException {
         String sql = "update vaitro set VT_TEN = ? where VT_MA = ?";
         PreparedStatement pStatement = Database.getInstance().prepareStatement(sql);
@@ -192,47 +159,10 @@ public class NhanVienService {
         pStatement.setString(2, vaitro.getMa());
         return pStatement.executeUpdate() > 0;
     }
-
-    // thêm mới một vai trò, tự cập nhật mã vai trò.
-    //thành công return true, ko thành công return false;
     public boolean addVaiTro(VaiTro vaitro) throws ClassNotFoundException, SQLException {
         String sql = "insert into vaitro values(?, ?)";
         PreparedStatement pStatement = Database.getInstance().prepareStatement(sql);
         pStatement.setString(1, vaitro.getMa());
         pStatement.setString(2, vaitro.getTen());
         return pStatement.executeUpdate() > 0;    }
-
-    public static void main(String[] args) {
-        NhanVienService service = NhanVienService.getInstance();
-
-        try {
-            ArrayList<VaiTro> vaitroList = service.getAllVaiTro();
-            for (VaiTro vaitro : vaitroList) {
-                System.out.println(vaitro);
-                System.out.println(vaitro.getQuyen());
-                System.out.println("------------------------");
-            }
-            ArrayList<NhanVien> nhanvienList = service.getAllNhanVien();
-            for(NhanVien nv : nhanvienList){
-                System.out.println(nv);
-                System.out.println(nv.getVaiTro());
-                System.out.println(nv.getVaiTro().getQuyen());
-                System.out.println("------------------------");
-                
-            }
-            //NhanVien nhanvien = new NhanVien("", "Duc Thinh", "", "", "", "", "mk", "tentk", false);
-            //nhanvien.setVaiTro(vaitroList.get(2));
-            //System.out.println(service.createNewAccount(nhanvien));
-            
-            //vaitroList.get(2).setTen("XXXXX");
-            //System.out.println(service.updateVaiTro(vaitroList.get(2)));
-            //service.addVaiTro(new VaiTro("xx", "xxxx"));
-            NhanVien nhanvien = service.loginAccount("nhanvien1", "matkhau");
-            nhanvien.setSoDienThoai("1111111111");
-            nhanvien.setTen("XXXXX");
-            service.updateNhanVien(nhanvien);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(NhanVienService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
