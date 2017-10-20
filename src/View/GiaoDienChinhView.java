@@ -1,15 +1,21 @@
 package View;
 
 import Model.NhanVien;
+import Model.Quyen;
+import java.util.ArrayList;
 
 public class GiaoDienChinhView extends Viewer {
+
     private final DangNhapView DangNhapView;
-    public GiaoDienChinhView(DangNhapView view) {
+
+    public GiaoDienChinhView(DangNhapView parentView) {
         super();
+        this.DangNhapView = parentView;
+
         initComponents();
         initSubView();
         initModel();
-        this.DangNhapView = view;
+
     }
 
     private void initSubView() {
@@ -21,15 +27,17 @@ public class GiaoDienChinhView extends Viewer {
         TaoVaiTroView = new TaoVaiTroView(this);
         ThongTinNhanVienView = new ThongTinNhanVienView(this);
     }
-    private void initModel(){
-        
+
+    private void initModel() {
+
     }
-    public void updateNhanVien(NhanVien nhanvien){
+
+    public void updateNhanVien(NhanVien nhanvien) {
         String TenNhanVien = nhanvien.getTen();
-        String MaNhanVien = nhanvien.getMa();
         jTextField_ttnhanvien_bh.setText(TenNhanVien);
         currentNhanVien = nhanvien;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,8 +45,8 @@ public class GiaoDienChinhView extends Viewer {
         jPanel1 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jToolBar2 = new javax.swing.JToolBar();
-        jButton_profile = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton_quanly = new javax.swing.JButton();
+        jButton_thongtincanhan = new javax.swing.JButton();
         jButton_dangxuat = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -121,29 +129,31 @@ public class GiaoDienChinhView extends Viewer {
         jToolBar2.setFloatable(false);
         jToolBar2.setRollover(true);
 
-        jButton_profile.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton_profile.setForeground(new java.awt.Color(0, 102, 0));
-        jButton_profile.setText("Quản lý viên");
-        jButton_profile.setFocusable(false);
-        jButton_profile.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton_profile.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton_profile.addActionListener(new java.awt.event.ActionListener() {
+        jButton_quanly.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton_quanly.setForeground(new java.awt.Color(0, 102, 0));
+        jButton_quanly.setText("Quản lý viên");
+        jButton_quanly.setFocusable(false);
+        jButton_quanly.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton_quanly.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton_quanly.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_profileActionPerformed(evt);
+                jButton_quanlyActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton_profile);
+        jToolBar2.add(jButton_quanly);
 
-        jButton1.setText("Nhân Viên");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_thongtincanhan.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton_thongtincanhan.setForeground(new java.awt.Color(0, 102, 0));
+        jButton_thongtincanhan.setText("Thông tin cá nhân");
+        jButton_thongtincanhan.setFocusable(false);
+        jButton_thongtincanhan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton_thongtincanhan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton_thongtincanhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton_thongtincanhanActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton1);
+        jToolBar2.add(jButton_thongtincanhan);
 
         jButton_dangxuat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton_dangxuat.setText("Đăng xuất");
@@ -720,16 +730,26 @@ public class GiaoDienChinhView extends Viewer {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_profileActionPerformed
-        QuanLyView.setVisible(true);
-        this.setEnabled(false);
-    }//GEN-LAST:event_jButton_profileActionPerformed
+    private void jButton_quanlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_quanlyActionPerformed
+        showQuanTri();
+    }//GEN-LAST:event_jButton_quanlyActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton_thongtincanhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_thongtincanhanActionPerformed
+        showNhanVienProfile();
+    }//GEN-LAST:event_jButton_thongtincanhanActionPerformed
+    public void showNhanVienProfile() {
         ThongTinNhanVienView.updateNhanVien(currentNhanVien);
         ThongTinNhanVienView.setVisible(true);
         this.setEnabled(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
+
+    public void showQuanTri() {
+        
+        QuanLyView.setVisible(true);
+        QuanLyView.updateNhanVien(currentNhanVien);
+        this.setEnabled(false);
+    }
+
     private QuanLyView QuanLyView;
     private SuaNhanVienView SuaNhanVienView;
     private TaoNhaCungCapView TaoNhaCungCapView;
@@ -738,11 +758,13 @@ public class GiaoDienChinhView extends Viewer {
     private TaoVaiTroView TaoVaiTroView;
     private ThongTinNhanVienView ThongTinNhanVienView;
     private NhanVien currentNhanVien;
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_dangxuat;
     private javax.swing.JButton jButton_in_hd;
-    private javax.swing.JButton jButton_profile;
+    private javax.swing.JButton jButton_quanly;
+    private javax.swing.JButton jButton_thongtincanhan;
     private javax.swing.JButton jButton_xem_hd;
     private javax.swing.JButton jButton_xoahd_bh;
     private javax.swing.JButton jButton_xoasp_spn;

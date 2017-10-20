@@ -10,21 +10,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 public class HoaDonService {
 
     private static HoaDonService Instance = null;
 
     private HoaDonService() {
     }
-
     public static HoaDonService getInstance() {
         if (Instance == null) {
             Instance = new HoaDonService();
         }
         return Instance;
     }
+
+    /**
+     * Thêm một hóa đơn vào cơ sở dữ liệu.
+     * @param hoadon dữ liệu HoaDon
+     * @return True nếu thành công, False nếu thất bại.
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public boolean addHoaDon(HoaDon hoadon) throws ClassNotFoundException, SQLException {
         String sql = "INSERT INTO `hoadon` (`HD_MA`, `NV_MA`, `HD_THOIGIANLAP`) "
                 + "VALUES (? , ?, (select NOW()));";
@@ -44,6 +49,16 @@ public class HoaDonService {
         }
         return false;
     }
+
+    /**
+     * Thêm một chi tiết hóa đơn vào cơ sở dữ liệu.
+     * @param ma_hd mã của hóa đơn
+     * @param stt số thứ tự của sản phẩm trong hóa đơn
+     * @param cthd đối tượng ChiTietHoaDon
+     * @return True nếu thành công, False nếu thất bại.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public boolean addChiTietHoaDon(String ma_hd, int stt, ChiTietHoaDon cthd) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO `chitiethd` (`SP_MA`, `HD_MA`, `CTHD_STT`, `CTHD_SOLUONG`, `CTHD_TONGTIEN`) "
                 + "VALUES (?, ?, ?, ?, ?);";
@@ -64,6 +79,15 @@ public class HoaDonService {
         }
         return result;
     }
+
+    /**
+     * Lấy danh sách Hóa đơn theo ngày.
+     * @param ngaybatdau ngày bắt đầu tính
+     * @param ngayketthuc ngày kết thúc tính
+     * @return danh sách Hóa đơn, danh sách rỗng nếu không tìm thấy hóa đơn nào.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public ArrayList<HoaDon> getHoaDonByDate(Date ngaybatdau, Date ngayketthuc) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM `hoadon`,`nhanvien` "
                 + "WHERE (HD_THOIGIANLAP BETWEEN ? and ?) and nhanvien.NV_MA = hoadon.NV_MA";
@@ -79,6 +103,14 @@ public class HoaDonService {
         }
         return hdList;
     }
+
+    /**
+     * Chuyển kiểu dữ liệu ResultSet sang kiểu dữ liệu HoaDon
+     * @param rs dữ liệu ResultSet với đầy đủ cột của bảng HoaDon
+     * @return dữ liệu HoaDon
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public HoaDon ResultSet_toHoaDon(ResultSet rs) throws SQLException, ClassNotFoundException {
         String ma = rs.getString("hd_ma");
         Date thoigianlap = rs.getDate("hd_thoigianlap");
@@ -90,6 +122,14 @@ public class HoaDonService {
         hd.setChiTietHoaDon(cthdList);
         return hd;
     }
+
+    /**
+     *
+     * @param ma_hd
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public ArrayList<ChiTietHoaDon> getChiTietHoaDonByMaHoaDon(String ma_hd) throws ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM `chitiethd` where HD_MA = ?";
         PreparedStatement pStatement = Database.getInstance().prepareStatement(sql);
@@ -101,6 +141,14 @@ public class HoaDonService {
         }
         return cthdList;
     }
+
+    /**
+     *
+     * @param rs
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public ChiTietHoaDon ResultSet_toChiTietHoaDon(ResultSet rs) throws SQLException, ClassNotFoundException {
         String ma_sp = rs.getString("sp_ma");
         float sl_sp = rs.getFloat("cthd_soluong");
@@ -109,6 +157,14 @@ public class HoaDonService {
         ChiTietHoaDon cthd = new ChiTietHoaDon(sanpham, sl_sp, tongtien_sp);
         return cthd;
     }
+
+    /**
+     *
+     * @param ma_nhanvien
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public ArrayList<HoaDon> getHoaDonByMaNhanVien(String ma_nhanvien) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM `hoadon`,`nhanvien` "
                 + "WHERE hoadon.NV_MA = ? and nhanvien.NV_MA = hoadon.NV_MA";
@@ -124,6 +180,13 @@ public class HoaDonService {
         return hdList;
     }
 
+    /**
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
     public Date createDate(String year, String month, String day){
         return Date.valueOf(year+"-"+month+"-"+day);
     }

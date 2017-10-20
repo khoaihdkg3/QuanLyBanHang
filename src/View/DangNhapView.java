@@ -40,8 +40,10 @@ public class DangNhapView extends Viewer {
         jLabel2.setText("Mật khẩu");
 
         jTextField_tk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField_tk.setText("quanly1");
 
         jPasswordField_mk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPasswordField_mk.setText("matkhau");
 
         jButton_dangnhap.setText("Đăng nhập");
         jButton_dangnhap.addActionListener(new java.awt.event.ActionListener() {
