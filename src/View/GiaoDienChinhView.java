@@ -3,6 +3,11 @@ package View;
 import Model.HoaDon;
 import Model.NhanVien;
 import Model.SanPham;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -21,7 +26,7 @@ public class GiaoDienChinhView extends Viewer {
         initComponents();
         initSubView();
         initModel();
-        startAutoUpdateNgayNhapTextField();
+        initListenner();
     }
 
     private void initSubView() {
@@ -33,8 +38,27 @@ public class GiaoDienChinhView extends Viewer {
         TaoVaiTroView = new TaoVaiTroView(this);
         ThongTinNhanVienView = new ThongTinNhanVienView(this);
     }
+    private void initListenner(){
+        startAutoUpdateNgayNhapTextField();
+        jTextField_timkiem_bh.addFocusListener(new FocusAdapter() {
 
+            @Override
+            public void focusGained(FocusEvent fe) {
+                jTextField_timkiem_bh.setText("");
+                super.focusGained(fe); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) {
+                if(!jTextField_timkiem_bh.getText().equals(""))
+                    jTextField_timkiem_bh.setText("Tìm kiếm.. [ctrl + f]");
+                super.focusLost(fe); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+});
+    }
     private void initModel() {
+        
         try {
             ArrayList<SanPham> sanphamList = SanPhamService.getAllSanPham();
             upateSanPhamList_HoaDonPanel(sanphamList);
@@ -213,6 +237,7 @@ public class GiaoDienChinhView extends Viewer {
         jPanel5.setLayout(new java.awt.BorderLayout());
 
         jTable_dssp_hd.setAutoCreateRowSorter(true);
+        jTable_dssp_hd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable_dssp_hd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -235,14 +260,14 @@ public class GiaoDienChinhView extends Viewer {
         jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jTextField_timkiem_bh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_timkiem_bh.setText("Tìm kiếm..");
+        jTextField_timkiem_bh.setText("Tìm kiếm.. [ctrl + f]");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 102));
         jLabel4.setText("Danh sách sản phẩm");
         jLabel4.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
-        jButton_lammoisp_hd.setText("Làm mới");
+        jButton_lammoisp_hd.setText("Làm mới [F5]");
         jButton_lammoisp_hd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_lammoisp_hdActionPerformed(evt);
@@ -355,6 +380,7 @@ public class GiaoDienChinhView extends Viewer {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setText("Tiền trả");
 
+        jTable_chitiethoadon.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable_chitiethoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -381,7 +407,7 @@ public class GiaoDienChinhView extends Viewer {
 
         jButton_xuathd_bh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton_xuathd_bh.setForeground(new java.awt.Color(0, 153, 0));
-        jButton_xuathd_bh.setText("Xuất hóa đơn");
+        jButton_xuathd_bh.setText("Xuất hóa đơn [ctrl + x]");
 
         jButton_xoatatcahd_bh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton_xoatatcahd_bh.setForeground(new java.awt.Color(255, 0, 0));
@@ -497,8 +523,8 @@ public class GiaoDienChinhView extends Viewer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_xoahd_bh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_xuathd_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_xoatatcahd_bh))
+                    .addComponent(jButton_xoatatcahd_bh)
+                    .addComponent(jButton_xuathd_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
         );
@@ -518,6 +544,7 @@ public class GiaoDienChinhView extends Viewer {
         jPanel13.setLayout(new java.awt.BorderLayout());
 
         jTable_dssp_spn.setAutoCreateRowSorter(true);
+        jTable_dssp_spn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable_dssp_spn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -540,14 +567,14 @@ public class GiaoDienChinhView extends Viewer {
         jPanel13.add(jScrollPane4, java.awt.BorderLayout.CENTER);
 
         jTextField_timkiem_spn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_timkiem_spn.setText("Tìm kiếm..");
+        jTextField_timkiem_spn.setText("Tìm kiếm.. [ctrl + f]");
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 102));
         jLabel15.setText("Danh sách sản phẩm");
         jLabel15.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
-        jButton1.setText("Làm mới");
+        jButton1.setText("Làm mới [F5]");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -606,6 +633,7 @@ public class GiaoDienChinhView extends Viewer {
         jTextField_ttnhanvien_spn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField_ttnhanvien_spn.setText("MANV-TENNV");
 
+        jTable_chitietsp_spn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable_chitietsp_spn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -697,6 +725,7 @@ public class GiaoDienChinhView extends Viewer {
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         jTable_hoadon.setAutoCreateRowSorter(true);
+        jTable_hoadon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable_hoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -721,12 +750,13 @@ public class GiaoDienChinhView extends Viewer {
         jPanel7.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         jTextField_timkiem_hd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_timkiem_hd.setText("Tìm kiếm..");
+        jTextField_timkiem_hd.setText("Lọc dữ liệu [ctrl + f]");
 
         jLabel10.setText("đến");
 
         jLabel12.setText("Từ ngày");
 
+        jFormattedTextField_ngaybd_hd.setForeground(new java.awt.Color(0, 102, 0));
         try {
             jFormattedTextField_ngaybd_hd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
@@ -734,6 +764,7 @@ public class GiaoDienChinhView extends Viewer {
         }
         jFormattedTextField_ngaybd_hd.setText("2017-10-18");
 
+        jFormattedTextField_ngaykt_hd.setForeground(new java.awt.Color(0, 102, 0));
         try {
             jFormattedTextField_ngaykt_hd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
@@ -774,16 +805,17 @@ public class GiaoDienChinhView extends Viewer {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_timkiem_hd, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField_ngaybd_hd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField_ngaykt_hd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_xem_hd)
-                    .addComponent(jButton_in_hd))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel12)
+                        .addComponent(jFormattedTextField_ngaybd_hd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextField_ngaykt_hd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_xem_hd)
+                        .addComponent(jButton_in_hd))))
         );
 
         jPanel7.add(jPanel8, java.awt.BorderLayout.PAGE_START);
