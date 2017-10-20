@@ -116,13 +116,21 @@ public class HoaDonService {
         Date thoigianlap = rs.getDate("hd_thoigianlap");
         NhanVien nhanvien = NhanVienService.getInstance().ResultSet_toNhanVien(rs);
         ArrayList<ChiTietHoaDon> cthdList = getChiTietHoaDonByMaHoaDon(ma);
+        float TongTien = sumTongTienChiTietHoaDon(cthdList);
         HoaDon hd = new HoaDon(nhanvien);
         hd.setMa(ma);
+        hd.setTongTien(TongTien);
         hd.setThoiGianLap(thoigianlap);
         hd.setChiTietHoaDon(cthdList);
         return hd;
     }
-
+    public float sumTongTienChiTietHoaDon(ArrayList<ChiTietHoaDon> cthdList){
+        float TongTien = 0;
+        for(ChiTietHoaDon cthd : cthdList){
+            TongTien += cthd.getTongTien();
+        }
+        return TongTien;
+    }
     /**
      *
      * @param ma_hd

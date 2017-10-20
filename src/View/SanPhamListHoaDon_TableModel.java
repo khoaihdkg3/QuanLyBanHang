@@ -16,8 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class SanPhamListHoaDon_TableModel extends AbstractTableModel {
 
     private final ArrayList<SanPham> SanPhamList;
-    private final String[] columnNames = {"Mã sản phẩm", "Tên sản phẩm", "Đơn vị tính",
-        "Đơn giá"};
+    protected String[] columnNames = {"Mã sản phẩm", "Tên sản phẩm", "Đơn vị tính", "Đơn giá"};
     private final int MASANPHAM_COL = 0;
     private final int TENSANPHAM_COL = 1;
     private final int DONVITINH_COL = 2;
@@ -26,7 +25,9 @@ public class SanPhamListHoaDon_TableModel extends AbstractTableModel {
     public SanPhamListHoaDon_TableModel(ArrayList<SanPham> SanPhamList) {
         this.SanPhamList = SanPhamList;
     }
-
+    public void setColumnNames(String[] columnNames){
+        this.columnNames = columnNames;
+    }
     @Override
     public int getRowCount() {
         return SanPhamList.size();
@@ -52,4 +53,14 @@ public class SanPhamListHoaDon_TableModel extends AbstractTableModel {
                 return null;
         }
     }
+    
+    public String[] getColumnNames() {
+        return columnNames;
+    }
+
+    @Override
+    public String getColumnName(int i) {
+        return columnNames[i];
+    }
+    
 }

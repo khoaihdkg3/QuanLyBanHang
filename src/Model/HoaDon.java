@@ -20,7 +20,7 @@ public class HoaDon {
     private Date ThoiGianLap;
     private NhanVien NhanVien;
     private ArrayList<ChiTietHoaDon> ChiTietHoaDon;
-
+    private float TongTien;
     public HoaDon(NhanVien NhanVien) {
         this.NhanVien = NhanVien;
     }
@@ -28,7 +28,7 @@ public class HoaDon {
     public String getMa() {
         return ma;
     }
-
+    
     public NhanVien getNhanVien() {
         return NhanVien;
     }
@@ -39,6 +39,10 @@ public class HoaDon {
 
     public ArrayList<ChiTietHoaDon> getChiTietHoaDon() {
         return ChiTietHoaDon;
+    }
+
+    public float getTongTien() {
+        return TongTien;
     }
     
     public void setMa(String ma) {
@@ -57,9 +61,13 @@ public class HoaDon {
         this.ChiTietHoaDon = ChiTietHoaDon;
     }
 
+    public void setTongTien(float TongTien) {
+        this.TongTien = TongTien;
+    }
+    
     @Override
     public String toString() {
-        return getMa()+"|"+getThoiGianLap();
+        return getMa()+"|"+getThoiGianLap()+"|"+getTongTien();
     }
     
 }

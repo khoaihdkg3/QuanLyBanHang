@@ -1,7 +1,11 @@
 package View;
+
+import Model.HoaDon;
 import Model.NhanVien;
 import Model.SanPham;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +21,7 @@ public class GiaoDienChinhView extends Viewer {
         initComponents();
         initSubView();
         initModel();
-
+        startAutoUpdateNgayNhapTextField();
     }
 
     private void initSubView() {
@@ -33,19 +37,36 @@ public class GiaoDienChinhView extends Viewer {
     private void initModel() {
         try {
             ArrayList<SanPham> sanphamList = SanPhamService.getAllSanPham();
-            SanPhamListHoaDon_TableModel modelSanPhamListHoaDon = new SanPhamListHoaDon_TableModel(sanphamList);
-            jTable_dssp_hd.setModel(modelSanPhamListHoaDon);
-           
+            upateSanPhamList_HoaDonPanel(sanphamList);
+            updateSanPhamList_SanPhamNhap(sanphamList);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    public void upateSanPhamList_HoaDonPanel(ArrayList<SanPham> sanphamList) throws ClassNotFoundException, SQLException {
+        SanPhamListHoaDon_TableModel modelSanPhamListHoaDon = new SanPhamListHoaDon_TableModel(sanphamList);
+        jTable_dssp_hd.setModel(modelSanPhamListHoaDon);
+    }
+
+    public void updateSanPhamList_SanPhamNhap(ArrayList<SanPham> sanphamList) throws ClassNotFoundException, SQLException {
+        SanPhamListHoaDon_TableModel modelSanPhamListSanPhamNhap = new SanPhamListHoaDon_TableModel(sanphamList);
+        String[] columnNames = {"Mã sản phẩm", "Tên sản phẩm", "Đơn vị tính"};
+        modelSanPhamListSanPhamNhap.setColumnNames(columnNames);
+        jTable_dssp_spn.setModel(modelSanPhamListSanPhamNhap);
+    }
+
+    public void updateHoaDonList(ArrayList<HoaDon> hoadonList) throws ClassNotFoundException, SQLException {
+        HoaDonList_TableModel modelHoaDonList = new HoaDonList_TableModel(hoadonList);
+        jTable_hoadon.setModel(modelHoaDonList);
     }
 
     public void updateNhanVien(NhanVien nhanvien) {
         String TenNhanVien = nhanvien.getTen();
         jTextField_ttnhanvien_bh.setText(TenNhanVien);
-        currentNhanVien = nhanvien;
+        jTextField_ttnhanvien_spn.setText(TenNhanVien);
+       currentNhanVien = nhanvien;
     }
 
     @SuppressWarnings("unchecked")
@@ -104,6 +125,7 @@ public class GiaoDienChinhView extends Viewer {
         jPanel14 = new javax.swing.JPanel();
         jTextField_timkiem_spn = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
@@ -118,7 +140,7 @@ public class GiaoDienChinhView extends Viewer {
         jLabel29 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable_hoadon = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jTextField_timkiem_hd = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -190,6 +212,7 @@ public class GiaoDienChinhView extends Viewer {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
+        jTable_dssp_hd.setAutoCreateRowSorter(true);
         jTable_dssp_hd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -220,6 +243,11 @@ public class GiaoDienChinhView extends Viewer {
         jLabel4.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jButton_lammoisp_hd.setText("Làm mới");
+        jButton_lammoisp_hd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_lammoisp_hdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -260,20 +288,24 @@ public class GiaoDienChinhView extends Viewer {
         jFormattedTextField_thanhtien_bh.setEditable(false);
         jFormattedTextField_thanhtien_bh.setForeground(new java.awt.Color(255, 0, 0));
         jFormattedTextField_thanhtien_bh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###"))));
+        jFormattedTextField_thanhtien_bh.setText("0");
         jFormattedTextField_thanhtien_bh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jFormattedTextField_tongtien_bh.setEditable(false);
         jFormattedTextField_tongtien_bh.setForeground(new java.awt.Color(255, 0, 0));
         jFormattedTextField_tongtien_bh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###"))));
+        jFormattedTextField_tongtien_bh.setText("0");
         jFormattedTextField_tongtien_bh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jFormattedTextField_tiennhan_bh.setForeground(new java.awt.Color(0, 153, 0));
         jFormattedTextField_tiennhan_bh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###"))));
+        jFormattedTextField_tiennhan_bh.setText("0");
         jFormattedTextField_tiennhan_bh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jFormattedTextField_tientra_bh.setEditable(false);
         jFormattedTextField_tientra_bh.setForeground(new java.awt.Color(255, 0, 0));
         jFormattedTextField_tientra_bh.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###"))));
+        jFormattedTextField_tientra_bh.setText("0");
         jFormattedTextField_tientra_bh.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -302,7 +334,7 @@ public class GiaoDienChinhView extends Viewer {
         jTextField_mahoadon_bh.setText("MSHD");
 
         jTextField_ngaylap_bh.setEditable(false);
-        jTextField_ngaylap_bh.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField_ngaylap_bh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField_ngaylap_bh.setText("dd/mm/yyyy hh:mm");
 
         jTextField_ttnhanvien_bh.setEditable(false);
@@ -375,11 +407,11 @@ public class GiaoDienChinhView extends Viewer {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jTextField_mahoadon_bh)
+                                .addComponent(jTextField_mahoadon_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_ngaylap_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextField_ngaylap_bh))
                             .addComponent(jTextField_ttnhanvien_bh)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jButton_xuathd_bh)
@@ -485,6 +517,7 @@ public class GiaoDienChinhView extends Viewer {
 
         jPanel13.setLayout(new java.awt.BorderLayout());
 
+        jTable_dssp_spn.setAutoCreateRowSorter(true);
         jTable_dssp_spn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -514,6 +547,13 @@ public class GiaoDienChinhView extends Viewer {
         jLabel15.setText("Danh sách sản phẩm");
         jLabel15.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        jButton1.setText("Làm mới");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -523,7 +563,9 @@ public class GiaoDienChinhView extends Viewer {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField_timkiem_spn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -533,7 +575,9 @@ public class GiaoDienChinhView extends Viewer {
                 .addGap(0, 21, Short.MAX_VALUE)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_timkiem_spn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_timkiem_spn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)))
         );
 
         jPanel13.add(jPanel14, java.awt.BorderLayout.PAGE_START);
@@ -553,7 +597,7 @@ public class GiaoDienChinhView extends Viewer {
         jLabel24.setText("Nhân viên");
 
         jTextField_ngaynhap_spn.setEditable(false);
-        jTextField_ngaynhap_spn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField_ngaynhap_spn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField_ngaynhap_spn.setText("dd/mm/yyyy hh:mm");
 
         jTextField_ttnhanvien_spn.setEditable(false);
@@ -639,7 +683,7 @@ public class GiaoDienChinhView extends Viewer {
                     .addComponent(jButton_xoasp_spn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_xoatatca_spn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
         );
 
         jPanel12.add(jPanel15);
@@ -652,7 +696,8 @@ public class GiaoDienChinhView extends Viewer {
 
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_hoadon.setAutoCreateRowSorter(true);
+        jTable_hoadon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -671,7 +716,7 @@ public class GiaoDienChinhView extends Viewer {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable_hoadon);
 
         jPanel7.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -683,18 +728,25 @@ public class GiaoDienChinhView extends Viewer {
         jLabel12.setText("Từ ngày");
 
         try {
-            jFormattedTextField_ngaybd_hd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextField_ngaybd_hd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextField_ngaybd_hd.setText("2017-10-18");
 
         try {
-            jFormattedTextField_ngaykt_hd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextField_ngaykt_hd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextField_ngaykt_hd.setText("2017-10-20");
 
         jButton_xem_hd.setText("Xem");
+        jButton_xem_hd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_xem_hdActionPerformed(evt);
+            }
+        });
 
         jButton_in_hd.setText("In");
         jButton_in_hd.setEnabled(false);
@@ -764,6 +816,39 @@ public class GiaoDienChinhView extends Viewer {
         DangNhapView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_dangxuatActionPerformed
+
+    private void jButton_lammoisp_hdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_lammoisp_hdActionPerformed
+        try {
+            ArrayList<SanPham> sanphamList = SanPhamService.getAllSanPham();
+            upateSanPhamList_HoaDonPanel(sanphamList);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_lammoisp_hdActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            ArrayList<SanPham> sanphamList = SanPhamService.getAllSanPham();
+            updateSanPhamList_SanPhamNhap(sanphamList);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton_xem_hdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_xem_hdActionPerformed
+        String txtNgayBatDau = jFormattedTextField_ngaybd_hd.getText();
+        String txtNgayKetThuc = jFormattedTextField_ngaykt_hd.getText();
+        Date NgayBatDau = Date.valueOf(txtNgayBatDau);
+        Date NgayKetThuc = Date.valueOf(txtNgayKetThuc);
+        try {
+            ArrayList<HoaDon> hoadonList = HoaDonService.getHoaDonByDate(NgayBatDau, NgayKetThuc);
+            updateHoaDonList(hoadonList);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_jButton_xem_hdActionPerformed
     public void showNhanVienProfile() {
         ThongTinNhanVienView.updateNhanVien(currentNhanVien);
         ThongTinNhanVienView.setVisible(true);
@@ -771,7 +856,7 @@ public class GiaoDienChinhView extends Viewer {
     }
 
     public void showQuanTri() {
-        
+
         QuanLyView.setVisible(true);
         QuanLyView.updateNhanVien(currentNhanVien);
         this.setEnabled(false);
@@ -786,8 +871,28 @@ public class GiaoDienChinhView extends Viewer {
     private ThongTinNhanVienView ThongTinNhanVienView;
     private NhanVien currentNhanVien;
 
-
+    public void startAutoUpdateNgayNhapTextField() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    long time_now = System.currentTimeMillis();
+                    String nowDate = new Date(time_now).toString();
+                    String nowTime = new Time(time_now).toString();
+                    jTextField_ngaylap_bh.setText(nowDate + " " + nowTime);
+                    jTextField_ngaynhap_spn.setText(nowDate + " " + nowTime);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_dangxuat;
     private javax.swing.JButton jButton_in_hd;
     private javax.swing.JButton jButton_lammoisp_hd;
@@ -851,11 +956,11 @@ public class GiaoDienChinhView extends Viewer {
     private javax.swing.JSpinner jSpinner_chietkhau_bh;
     private javax.swing.JSpinner jSpinner_vat;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable_chitiethoadon;
     private javax.swing.JTable jTable_chitietsp_spn;
     private javax.swing.JTable jTable_dssp_hd;
     private javax.swing.JTable jTable_dssp_spn;
+    private javax.swing.JTable jTable_hoadon;
     private javax.swing.JTextField jTextField_mahoadon_bh;
     private javax.swing.JTextField jTextField_ngaylap_bh;
     private javax.swing.JTextField jTextField_ngaynhap_spn;
