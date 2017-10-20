@@ -32,9 +32,7 @@ public class GiaoDienChinhView extends Viewer {
 
     private void initModel() {
         try {
-            System.out.println(SanPhamService);
             ArrayList<SanPham> sanphamList = SanPhamService.getAllSanPham();
-            System.out.println(sanphamList);
             SanPhamListHoaDon_TableModel modelSanPhamListHoaDon = new SanPhamListHoaDon_TableModel(sanphamList);
             jTable_dssp_hd.setModel(modelSanPhamListHoaDon);
            

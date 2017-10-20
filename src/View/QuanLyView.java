@@ -1,9 +1,9 @@
 package View;
 
+import Constant.MaQuyen;
 import Model.NhanVien;
 import Model.Quyen;
 import java.awt.Component;
-import java.awt.Container;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -13,30 +13,40 @@ public class QuanLyView extends SubViewer {
         super(parentView);
         initComponents();
     }
-
+    
     public void updateNhanVien(NhanVien nhanvien) {
         currentNhanVien = nhanvien;
-        
-        int index_qltk_tab = jTabbedPane.indexOfComponent(jPanel_qltk);
-        removeNoPermissionTab();
+        removeAllTab();
+        addSpecificTab();
         
     }
-    private void removeNoPermissionTab(){
-        ArrayList<Boolean> removedArray = new ArrayList<>();
-        removedArray.add(true);// 0
-        removedArray.add(true);// 1
-        removedArray.add(true);// 2
-        removedArray.add(true);// 3
-        removedArray.add(true);// 4
-        
+    public void removeAllTab(){
+        jTabbedPane.removeAll();
+    }
+    private void addSpecificTab(){
         ArrayList<Quyen> quyenList = currentNhanVien.getVaiTro().getQuyen();
         for(Quyen quyen : quyenList){
-            int index = Integer.parseInt(quyen.getMa()) - 1;
-            if(index < removedArray.size())
-                removedArray.set(index, true);
-            
+            JPanel panel = (JPanel) getPaneInTabbedPane_ByQuyen(quyen);
+            if(panel != null)
+                jTabbedPane.addTab(quyen.getDienGiai(), panel);
         }
-        System.out.println(removedArray);
+        jTabbedPane.addTab("Thống kê", jPanel_thongke);
+    }
+    private Component getPaneInTabbedPane_ByQuyen(Quyen quyen){
+        switch(quyen.getMa()){
+            case MaQuyen.QUANLY_TAIKHOAN:
+                return jPanel_qltk;
+            case MaQuyen.QUANLY_VAITRO:
+                return jPanel_qlvt;
+            case MaQuyen.QUANLY_SANPHAM:
+                return jPanel_qlsp;
+            case MaQuyen.QUANLY_NHACUNGCAP:
+                return jPanel_qlncc;
+            case MaQuyen.QUANLY_NHANVIEN:
+                return jPanel_qlnv;
+            default:
+                return null;
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

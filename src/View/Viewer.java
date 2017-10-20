@@ -3,7 +3,6 @@ package View;
 import Service.HoaDonService;
 import Service.NhanVienService;
 import Service.SanPhamService;
-import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -14,7 +13,7 @@ public class Viewer extends javax.swing.JFrame {
     protected NhanVienService NhanVienService;
     protected SanPhamService SanPhamService;
 
-    public Viewer() throws HeadlessException {
+    public Viewer() {
         applyWindowTheme();
         initServices();
     }
@@ -22,7 +21,7 @@ public class Viewer extends javax.swing.JFrame {
     private void initServices() {
         HoaDonService = HoaDonService.getInstance();
         NhanVienService = NhanVienService.getInstance();
-        HoaDonService = HoaDonService.getInstance();
+        SanPhamService = SanPhamService.getInstance();
     }
 
     private void applyWindowTheme() {
