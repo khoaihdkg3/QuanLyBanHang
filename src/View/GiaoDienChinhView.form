@@ -102,6 +102,9 @@
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="verticalTextPosition" type="int" value="3"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_dangxuatActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -160,7 +163,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable_dssp_bh">
+                            <Component class="javax.swing.JTable" name="jTable_dssp_hd">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="4" rowCount="2">
@@ -187,9 +190,11 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel4" alignment="1" pref="448" max="32767" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel4" pref="448" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                              <Component id="jButton_lammoisp_hd" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="jTextField_timkiem_bh" min="-2" pref="184" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -203,7 +208,10 @@
                                       <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                                       <Component id="jLabel4" min="-2" pref="26" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField_timkiem_bh" min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jTextField_timkiem_bh" min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="jButton_lammoisp_hd" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -231,6 +239,11 @@
                                     <CompoundBorder/>
                                   </Border>
                                 </Property>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="jButton_lammoisp_hd">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i"/>
                               </Properties>
                             </Component>
                           </SubComponents>

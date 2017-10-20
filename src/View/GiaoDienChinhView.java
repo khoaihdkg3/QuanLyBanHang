@@ -1,8 +1,10 @@
 package View;
-
 import Model.NhanVien;
-import Model.Quyen;
+import Model.SanPham;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GiaoDienChinhView extends Viewer {
 
@@ -29,7 +31,17 @@ public class GiaoDienChinhView extends Viewer {
     }
 
     private void initModel() {
-
+        try {
+            System.out.println(SanPhamService);
+            ArrayList<SanPham> sanphamList = SanPhamService.getAllSanPham();
+            System.out.println(sanphamList);
+            SanPhamListHoaDon_TableModel modelSanPhamListHoaDon = new SanPhamListHoaDon_TableModel(sanphamList);
+            jTable_dssp_hd.setModel(modelSanPhamListHoaDon);
+           
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(GiaoDienChinhView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void updateNhanVien(NhanVien nhanvien) {
@@ -53,10 +65,11 @@ public class GiaoDienChinhView extends Viewer {
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_dssp_bh = new javax.swing.JTable();
+        jTable_dssp_hd = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jTextField_timkiem_bh = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jButton_lammoisp_hd = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -160,6 +173,11 @@ public class GiaoDienChinhView extends Viewer {
         jButton_dangxuat.setFocusable(false);
         jButton_dangxuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton_dangxuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton_dangxuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_dangxuatActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton_dangxuat);
 
         jPanel17.add(jToolBar2, java.awt.BorderLayout.CENTER);
@@ -174,7 +192,7 @@ public class GiaoDienChinhView extends Viewer {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jTable_dssp_bh.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_dssp_hd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null}
@@ -191,7 +209,7 @@ public class GiaoDienChinhView extends Viewer {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable_dssp_bh);
+        jScrollPane1.setViewportView(jTable_dssp_hd);
 
         jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -203,6 +221,8 @@ public class GiaoDienChinhView extends Viewer {
         jLabel4.setText("Danh sách sản phẩm");
         jLabel4.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        jButton_lammoisp_hd.setText("Làm mới");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -212,7 +232,9 @@ public class GiaoDienChinhView extends Viewer {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton_lammoisp_hd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextField_timkiem_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -222,7 +244,9 @@ public class GiaoDienChinhView extends Viewer {
                 .addGap(0, 21, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField_timkiem_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_timkiem_bh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_lammoisp_hd)))
         );
 
         jPanel5.add(jPanel6, java.awt.BorderLayout.PAGE_START);
@@ -258,10 +282,10 @@ public class GiaoDienChinhView extends Viewer {
         jLabel9.setText("VAT %");
 
         jSpinner_vat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jSpinner_vat.setModel(new javax.swing.SpinnerNumberModel(10, null, null, 1));
+        jSpinner_vat.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(10), null, null, Integer.valueOf(1)));
 
         jSpinner_chietkhau_bh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jSpinner_chietkhau_bh.setModel(new javax.swing.SpinnerNumberModel(0.0f, null, null, 0.5f));
+        jSpinner_chietkhau_bh.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), null, null, Float.valueOf(0.5f)));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Chiết khấu %");
@@ -737,6 +761,11 @@ public class GiaoDienChinhView extends Viewer {
     private void jButton_thongtincanhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_thongtincanhanActionPerformed
         showNhanVienProfile();
     }//GEN-LAST:event_jButton_thongtincanhanActionPerformed
+
+    private void jButton_dangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_dangxuatActionPerformed
+        DangNhapView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton_dangxuatActionPerformed
     public void showNhanVienProfile() {
         ThongTinNhanVienView.updateNhanVien(currentNhanVien);
         ThongTinNhanVienView.setVisible(true);
@@ -763,6 +792,7 @@ public class GiaoDienChinhView extends Viewer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_dangxuat;
     private javax.swing.JButton jButton_in_hd;
+    private javax.swing.JButton jButton_lammoisp_hd;
     private javax.swing.JButton jButton_quanly;
     private javax.swing.JButton jButton_thongtincanhan;
     private javax.swing.JButton jButton_xem_hd;
@@ -826,7 +856,7 @@ public class GiaoDienChinhView extends Viewer {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable_chitiethoadon;
     private javax.swing.JTable jTable_chitietsp_spn;
-    private javax.swing.JTable jTable_dssp_bh;
+    private javax.swing.JTable jTable_dssp_hd;
     private javax.swing.JTable jTable_dssp_spn;
     private javax.swing.JTextField jTextField_mahoadon_bh;
     private javax.swing.JTextField jTextField_ngaylap_bh;
