@@ -1,6 +1,8 @@
-package View;
+package View.Add_Edit_Remove;
 
+import View.Parent.SubViewer;
 import Model.NhanVien;
+import View.GiaoDienChinhView;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

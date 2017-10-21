@@ -78,7 +78,7 @@ public class SanPhamService {
         return loaisanpham;
     }
 
-    public ArrayList<NhaCungCap> getAllNhaCungCap(String ma_sanpham) throws SQLException, ClassNotFoundException {
+    public ArrayList<NhaCungCap> getAllNhaCungCap() throws SQLException, ClassNotFoundException {
         return getNhaCungCap("*");
     }
 

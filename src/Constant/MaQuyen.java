@@ -2,6 +2,7 @@ package Constant;
 
 public class MaQuyen {
     
+    public static final String QUANLY = "0";
     public static final String QUANLY_TAIKHOAN = "1";
     public static final String QUANLY_VAITRO = "2";
     public static final String QUANLY_NHANVIEN = "3";

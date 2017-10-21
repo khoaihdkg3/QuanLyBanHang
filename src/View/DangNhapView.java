@@ -1,5 +1,6 @@
 package View;
 
+import View.Parent.Viewer;
 import Model.NhanVien;
 import java.sql.SQLException;
 

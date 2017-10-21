@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package View;
+package View.Model;
 
 import Model.HoaDon;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-
-/**
- *
- * @author student
- */
 public class HoaDonList_TableModel extends AbstractTableModel{
     
     private final ArrayList<HoaDon> HoaDonList;
@@ -45,7 +36,9 @@ public class HoaDonList_TableModel extends AbstractTableModel{
             case MAHOADON_COL:
                 return HoaDonList.get(i).getMa();
             case NGAYLAP_COL:
-                return HoaDonList.get(i).getThoiGianLap();
+                Date date = HoaDonList.get(i).getThoiGianLapDate();
+                Time time = HoaDonList.get(i).getThoiGianLapTime();
+                return date + " - "+ time;
             case NHANVIENLAP_COL:
                 return HoaDonList.get(i).getNhanVien().getTen();
             case TONGTIEN_COL:

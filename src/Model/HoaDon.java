@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 
@@ -17,7 +18,8 @@ import java.util.ArrayList;
  */
 public class HoaDon {
     private String ma;
-    private Date ThoiGianLap;
+    private Date ThoiGianLapDate;
+    private Time ThoiGianLapTime;
     private NhanVien NhanVien;
     private ArrayList<ChiTietHoaDon> ChiTietHoaDon;
     private float TongTien;
@@ -33,10 +35,14 @@ public class HoaDon {
         return NhanVien;
     }
 
-    public Date getThoiGianLap() {
-        return ThoiGianLap;
+    public Date getThoiGianLapDate() {
+        return ThoiGianLapDate;
     }
 
+    public Time getThoiGianLapTime() {
+        return ThoiGianLapTime;
+    }
+    
     public ArrayList<ChiTietHoaDon> getChiTietHoaDon() {
         return ChiTietHoaDon;
     }
@@ -53,8 +59,12 @@ public class HoaDon {
         this.NhanVien = NhanVien;
     }
 
-    public void setThoiGianLap(Date ThoiGianLap) {
-        this.ThoiGianLap = ThoiGianLap;
+    public void setThoiGianLapDate(Date ThoiGianLapDate) {
+        this.ThoiGianLapDate = ThoiGianLapDate;
+    }
+
+    public void setThoiGianLapTime(Time ThoiGianLapTime) {
+        this.ThoiGianLapTime = ThoiGianLapTime;
     }
 
     public void setChiTietHoaDon(ArrayList<ChiTietHoaDon> ChiTietHoaDon) {
@@ -67,7 +77,7 @@ public class HoaDon {
     
     @Override
     public String toString() {
-        return getMa()+"|"+getThoiGianLap()+"|"+getTongTien();
+        return getMa()+"|"+getThoiGianLapDate()+" - "+getThoiGianLapTime()+"|"+getTongTien();
     }
     
 }

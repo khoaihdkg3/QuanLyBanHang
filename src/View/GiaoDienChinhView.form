@@ -124,7 +124,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel2">
+            <Container class="javax.swing.JPanel" name="jPanel_bh">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="B&#xe1;n h&#xe0;ng">
@@ -163,11 +163,11 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable_dssp_hd">
+                            <Component class="javax.swing.JTable" name="jTable_dssp_bh">
                               <Properties>
                                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="12" style="1"/>
+                                  <Font name="Tahoma" size="14" style="1"/>
                                 </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="4" rowCount="2">
@@ -177,6 +177,7 @@
                                     <Column editable="false" title="&#x110;&#x1a1;n gi&#xe1;" type="java.lang.Object"/>
                                   </Table>
                                 </Property>
+                                <Property name="rowHeight" type="int" value="32"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -247,6 +248,12 @@
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton_lammoisp_hd">
                               <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="33" green="99" red="0" type="rgb"/>
+                                </Property>
                                 <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i [F5]"/>
                               </Properties>
                               <Events>
@@ -411,10 +418,12 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jButton_xoahd_bh" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton_xoatatcahd_bh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jButton_xuathd_bh" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jButton_xoahd_bh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton_xoatatcahd_bh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" pref="231" max="32767" attributes="0"/>
@@ -652,8 +661,11 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="0" green="99" red="0" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t h&#xf3;a &#x111;&#x1a1;n [ctrl + x]"/>
+                            <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t h&#xf3;a &#x111;&#x1a1;n [Ctrl+Enter]"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_xuathd_bhActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton_xoatatcahd_bh">
                           <Properties>
@@ -688,7 +700,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel10">
+            <Container class="javax.swing.JPanel" name="jPanel_spn">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="S&#x1ea3;n ph&#x1ea9;m nh&#x1ead;p">
@@ -740,7 +752,7 @@
                                   <Properties>
                                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Tahoma" size="12" style="1"/>
+                                      <Font name="Tahoma" size="14" style="1"/>
                                     </Property>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                       <Table columnCount="3" rowCount="2">
@@ -749,6 +761,7 @@
                                         <Column editable="false" title="&#x110;&#x1a1;n v&#x1ecb; t&#xed;nh" type="java.lang.Object"/>
                                       </Table>
                                     </Property>
+                                    <Property name="rowHeight" type="int" value="32"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>
@@ -769,7 +782,7 @@
                                               <Component id="jLabel15" pref="448" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
                                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jButton_lammoisp_spn" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="jTextField_timkiem_spn" min="-2" pref="184" max="-2" attributes="0"/>
                                               </Group>
@@ -786,7 +799,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jTextField_timkiem_spn" min="-2" pref="27" max="-2" attributes="0"/>
-                                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jButton_lammoisp_spn" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -817,12 +830,18 @@
                                     </Property>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="jButton1">
+                                <Component class="javax.swing.JButton" name="jButton_lammoisp_spn">
                                   <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Tahoma" size="11" style="1"/>
+                                    </Property>
+                                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color blue="33" green="99" red="0" type="rgb"/>
+                                    </Property>
                                     <Property name="text" type="java.lang.String" value="L&#xe0;m m&#x1edb;i [F5]"/>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_lammoisp_spnActionPerformed"/>
                                   </Events>
                                 </Component>
                               </SubComponents>
@@ -860,7 +879,8 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jScrollPane5" alignment="0" pref="448" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              <Component id="jButton_ghinhan_spn" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                               <Component id="jButton_xoasp_spn" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="jButton_xoatatca_spn" min="-2" max="-2" attributes="0"/>
@@ -903,6 +923,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jButton_xoasp_spn" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jButton_xoatatca_spn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton_ghinhan_spn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jScrollPane5" pref="357" max="32767" attributes="0"/>
@@ -970,6 +991,7 @@
                                         <Column editable="false" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
                                       </Table>
                                     </Property>
+                                    <Property name="rowHeight" type="int" value="32"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>
@@ -1015,6 +1037,20 @@
                                 </Property>
                               </Properties>
                             </Component>
+                            <Component class="javax.swing.JButton" name="jButton_ghinhan_spn">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="1"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="33" green="99" red="0" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Ghi nh&#x1ead;n [Ctrl+Enter]"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_ghinhan_spnActionPerformed"/>
+                              </Events>
+                            </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>
@@ -1023,7 +1059,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel7">
+            <Container class="javax.swing.JPanel" name="jPanel_hd">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="H&#xf3;a &#x111;&#x1a1;n">
@@ -1050,7 +1086,7 @@
                       <Properties>
                         <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="12" style="1"/>
+                          <Font name="Tahoma" size="14" style="1"/>
                         </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="4">
@@ -1060,6 +1096,7 @@
                             <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
                           </Table>
                         </Property>
+                        <Property name="rowHeight" type="int" value="32"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1097,9 +1134,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField_timkiem_hd" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jFormattedTextField_ngaybd_hd" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1107,6 +1143,7 @@
                                       <Component id="jButton_xem_hd" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jButton_in_hd" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Component id="jTextField_timkiem_hd" min="-2" pref="27" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1118,7 +1155,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="14" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="L&#x1ecd;c d&#x1eef; li&#x1ec7;u [ctrl + f]"/>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m.. [ctrl + f]"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel10">

@@ -1,5 +1,6 @@
-package View;
+package View.Parent;
 
+import View.GiaoDienChinhView;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

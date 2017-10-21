@@ -1,4 +1,8 @@
-package View;
+package View.Add_Edit_Remove;
+
+import View.GiaoDienChinhView;
+import View.Parent.SubViewer;
+
 public class TaoTaiKhoanView extends SubViewer {
     public TaoTaiKhoanView(GiaoDienChinhView parentView) {
         super(parentView);

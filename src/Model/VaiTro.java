@@ -47,7 +47,7 @@ public class VaiTro {
 
     @Override
     public String toString() {
-        return getMa()+"|"+getTen();
+        return getTen();
     }
     
 }

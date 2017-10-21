@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
 public class HoaDonService {
@@ -113,14 +114,18 @@ public class HoaDonService {
      */
     public HoaDon ResultSet_toHoaDon(ResultSet rs) throws SQLException, ClassNotFoundException {
         String ma = rs.getString("hd_ma");
-        Date thoigianlap = rs.getDate("hd_thoigianlap");
+        Date thoigianlap_date = rs.getDate("hd_thoigianlap");
+        Time thoigianlap_time = rs.getTime("hd_thoigianlap");
+        
         NhanVien nhanvien = NhanVienService.getInstance().ResultSet_toNhanVien(rs);
         ArrayList<ChiTietHoaDon> cthdList = getChiTietHoaDonByMaHoaDon(ma);
         float TongTien = sumTongTienChiTietHoaDon(cthdList);
         HoaDon hd = new HoaDon(nhanvien);
         hd.setMa(ma);
         hd.setTongTien(TongTien);
-        hd.setThoiGianLap(thoigianlap);
+        hd.setThoiGianLapDate(thoigianlap_date);
+        hd.setThoiGianLapTime(thoigianlap_time);
+        
         hd.setChiTietHoaDon(cthdList);
         return hd;
     }

@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package View;
+package View.Model;
 
 import Model.SanPham;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-
-/**
- *
- * @author student
- */
-public class SanPhamListHoaDon_TableModel extends AbstractTableModel {
+public class SanPhamList_TableModel extends AbstractTableModel {
 
     private final ArrayList<SanPham> SanPhamList;
     protected String[] columnNames = {"Mã sản phẩm", "Tên sản phẩm", "Đơn vị tính", "Đơn giá"};
@@ -22,7 +12,7 @@ public class SanPhamListHoaDon_TableModel extends AbstractTableModel {
     private final int DONVITINH_COL = 2;
     private final int DONGIA_COL = 3;
 
-    public SanPhamListHoaDon_TableModel(ArrayList<SanPham> SanPhamList) {
+    public SanPhamList_TableModel(ArrayList<SanPham> SanPhamList) {
         this.SanPhamList = SanPhamList;
     }
     public void setColumnNames(String[] columnNames){
