@@ -259,7 +259,7 @@ public class SanPhamService {
         SanPhamNhap spn = new SanPhamNhap(sanpham, ngaynhap, dongia, soluong);
         return spn;
     }
-
+    
     public Date createDate(String year, String month, String day) {
         return Date.valueOf(year + "-" + month + "-" + day);
     }

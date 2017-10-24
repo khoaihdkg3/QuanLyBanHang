@@ -19,7 +19,9 @@ public class ChiTietHoaDon {
         this.TongTien = TongTien;
         this.SanPham = SanPham;
     }
-
+    public ChiTietHoaDon(){
+        
+    }
     public float getTongTien() {
         return TongTien;
     }

@@ -32,7 +32,8 @@ public class SanPhamList_TableModel extends AbstractTableModel {
     public Object getValueAt(int i, int i1) {
         switch (i1) {
             case MASANPHAM_COL:
-                return SanPhamList.get(i).getMa();
+                String ma = SanPhamList.get(i).getLoaiSanPham().getMa()+SanPhamList.get(i).getMa();
+                return ma;
             case TENSANPHAM_COL:
                 return SanPhamList.get(i).getTen();
             case DONVITINH_COL:
@@ -52,5 +53,7 @@ public class SanPhamList_TableModel extends AbstractTableModel {
     public String getColumnName(int i) {
         return columnNames[i];
     }
-    
+    public SanPham getRow(int i){
+        return SanPhamList.get(i);
+    }
 }

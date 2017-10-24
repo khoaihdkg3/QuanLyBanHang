@@ -4,12 +4,16 @@ import View.Parent.SubViewer;
 import Constant.MaQuyen;
 import Model.NhanVien;
 import Model.Quyen;
+import Model.VaiTro;
 import View.Model.NhaCungCapList_TableModel;
 import View.Model.NhanVienList_TableModel;
+import View.Model.QuyenList_TableModel;
 import View.Model.SanPhamList_TableModel;
 import View.Model.TaiKhoanList_TableModel;
 import View.Model.VaiTroList_ComboboxModel;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,8 +32,15 @@ public class QuanLyView extends SubViewer {
         JTextField_SetPlaceholder(jTextField_timkiem_ncc, "Tìm kiếm..");
         JTextField_SetPlaceholder(jTextField_timkiem_qlnv, "Tìm kiếm..");
         JTextField_SetPlaceholder(jTextField_timkiem_qlsp, "Tìm kiếm..");
+        jComboBox_qlvt.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                VaiTro vaitro = (VaiTro) jComboBox_qlvt.getSelectedItem();
+                updateQuyen(vaitro.getQuyen());
+            }
+        });
     }
-
+    
     public void updateNhanVien(NhanVien nhanvien) {
         currentNhanVien = nhanvien;
         removeAllTab();
@@ -45,7 +56,7 @@ public class QuanLyView extends SubViewer {
 
         ArrayList<Quyen> quyenList = currentNhanVien.getVaiTro().getQuyen();
         for (Quyen quyen : quyenList) {
-            JPanel panel = (JPanel) getPaneInTabbedPane_ByQuyen(quyen);
+            JPanel panel = (JPanel) getPanelInTabbedPanel_ByQuyen(quyen);
             if (panel != null) {
                 jTabbedPane.addTab(quyen.getDienGiai(), panel);
             }
@@ -53,7 +64,7 @@ public class QuanLyView extends SubViewer {
         jTabbedPane.addTab("Thống kê", jPanel_thongke);
     }
 
-    private Component getPaneInTabbedPane_ByQuyen(Quyen quyen) {
+    private Component getPanelInTabbedPanel_ByQuyen(Quyen quyen) {
         switch (quyen.getMa()) {
             case MaQuyen.QUANLY_TAIKHOAN:
                 updateTaiKhoan();
@@ -88,6 +99,8 @@ public class QuanLyView extends SubViewer {
         try {
             VaiTroList_ComboboxModel model = new VaiTroList_ComboboxModel(NhanVienService.getAllVaiTro());
             jComboBox_qlvt.setModel(model);
+            VaiTro vaitro = (VaiTro) jComboBox_qlvt.getSelectedItem();
+            updateQuyen(vaitro.getQuyen());
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(QuanLyView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,6 +133,11 @@ public class QuanLyView extends SubViewer {
         }
     }
 
+    private void updateQuyen(ArrayList<Quyen> quyenList) {
+        QuyenList_TableModel model = new QuyenList_TableModel(quyenList);
+        jTable_qlvt.setModel(model);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,7 +154,6 @@ public class QuanLyView extends SubViewer {
         jButton_xoa_qltk = new javax.swing.JButton();
         jButton_sua_qltk = new javax.swing.JButton();
         jButton_them_qltk = new javax.swing.JButton();
-        jButton_xuat_qltk = new javax.swing.JButton();
         jPanel_qlvt = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jComboBox_qlvt = new javax.swing.JComboBox<>();
@@ -153,7 +170,6 @@ public class QuanLyView extends SubViewer {
         jTable_qlnv = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jButton_sua_qlnv = new javax.swing.JButton();
-        jButton_xuat_qlnv = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jTextField_timkiem_qlnv = new javax.swing.JTextField();
         jPanel_qlncc = new javax.swing.JPanel();
@@ -161,7 +177,6 @@ public class QuanLyView extends SubViewer {
         jButton_xoa_ncc = new javax.swing.JButton();
         jButton_sua_ncc = new javax.swing.JButton();
         jButton_them_ncc = new javax.swing.JButton();
-        jButton_xuat_ncc = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable_qlncc = new javax.swing.JTable();
         jPanel15 = new javax.swing.JPanel();
@@ -175,7 +190,6 @@ public class QuanLyView extends SubViewer {
         jButton_xoa_qlsp = new javax.swing.JButton();
         jButton_sua_qlsp = new javax.swing.JButton();
         jButton_them_qlsp = new javax.swing.JButton();
-        jButton_xuat_qlsp = new javax.swing.JButton();
         jPanel_thongke = new javax.swing.JPanel();
         jButton_tonkho = new javax.swing.JButton();
         jButton_tkdoanhthu = new javax.swing.JButton();
@@ -220,6 +234,7 @@ public class QuanLyView extends SubViewer {
             }
         });
         jTable_qltk.setRowHeight(32);
+        jTable_qltk.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane7.setViewportView(jTable_qltk);
 
         jPanel_qltk.add(jScrollPane7, java.awt.BorderLayout.CENTER);
@@ -235,18 +250,13 @@ public class QuanLyView extends SubViewer {
         jButton_them_qltk.setForeground(new java.awt.Color(0, 153, 51));
         jButton_them_qltk.setText("Thêm mới");
 
-        jButton_xuat_qltk.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton_xuat_qltk.setText("Xuất");
-
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                 .addComponent(jButton_xoa_qltk, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                .addComponent(jButton_xuat_qltk, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addComponent(jButton_sua_qltk, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_them_qltk, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,8 +268,7 @@ public class QuanLyView extends SubViewer {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_them_qltk)
                     .addComponent(jButton_sua_qltk)
-                    .addComponent(jButton_xoa_qltk)
-                    .addComponent(jButton_xuat_qltk)))
+                    .addComponent(jButton_xoa_qltk)))
         );
 
         jPanel_qltk.add(jPanel18, java.awt.BorderLayout.PAGE_END);
@@ -299,6 +308,7 @@ public class QuanLyView extends SubViewer {
             }
         });
         jTable_qlvt.setRowHeight(32);
+        jTable_qlvt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane6.setViewportView(jTable_qlvt);
 
         jPanel_qlvt.add(jScrollPane6, java.awt.BorderLayout.CENTER);
@@ -361,6 +371,7 @@ public class QuanLyView extends SubViewer {
             }
         });
         jTable_qlnv.setRowHeight(32);
+        jTable_qlnv.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jTable_qlnv);
 
         jPanel4.add(jScrollPane3, java.awt.BorderLayout.CENTER);
@@ -368,26 +379,19 @@ public class QuanLyView extends SubViewer {
         jButton_sua_qlnv.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton_sua_qlnv.setText("Sửa");
 
-        jButton_xuat_qlnv.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton_xuat_qlnv.setText("Xuất");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 451, Short.MAX_VALUE)
-                .addComponent(jButton_xuat_qlnv, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 537, Short.MAX_VALUE)
                 .addComponent(jButton_sua_qlnv, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_sua_qlnv)
-                    .addComponent(jButton_xuat_qlnv)))
+                .addComponent(jButton_sua_qlnv))
         );
 
         jPanel4.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -416,18 +420,13 @@ public class QuanLyView extends SubViewer {
         jButton_them_ncc.setForeground(new java.awt.Color(0, 153, 0));
         jButton_them_ncc.setText("Thêm mới");
 
-        jButton_xuat_ncc.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton_xuat_ncc.setText("Xuất");
-
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
                 .addComponent(jButton_xoa_ncc, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                .addComponent(jButton_xuat_ncc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addComponent(jButton_sua_ncc, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_them_ncc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -439,8 +438,7 @@ public class QuanLyView extends SubViewer {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_them_ncc)
                     .addComponent(jButton_sua_ncc)
-                    .addComponent(jButton_xoa_ncc)
-                    .addComponent(jButton_xuat_ncc)))
+                    .addComponent(jButton_xoa_ncc)))
         );
 
         jPanel_qlncc.add(jPanel19, java.awt.BorderLayout.PAGE_END);
@@ -464,6 +462,7 @@ public class QuanLyView extends SubViewer {
         });
         jTable_qlncc.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jTable_qlncc.setRowHeight(32);
+        jTable_qlncc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(jTable_qlncc);
 
         jPanel_qlncc.add(jScrollPane5, java.awt.BorderLayout.CENTER);
@@ -497,6 +496,7 @@ public class QuanLyView extends SubViewer {
             }
         });
         jTable_qlsp.setRowHeight(32);
+        jTable_qlsp.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(jTable_qlsp);
 
         jPanel_qlsp.add(jScrollPane4, java.awt.BorderLayout.CENTER);
@@ -519,18 +519,13 @@ public class QuanLyView extends SubViewer {
         jButton_them_qlsp.setForeground(new java.awt.Color(0, 153, 51));
         jButton_them_qlsp.setText("Thêm mới");
 
-        jButton_xuat_qlsp.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton_xuat_qlsp.setText("Xuất");
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addComponent(jButton_xoa_qlsp, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                .addComponent(jButton_xuat_qlsp, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
                 .addComponent(jButton_sua_qlsp, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_them_qlsp, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -542,8 +537,7 @@ public class QuanLyView extends SubViewer {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_them_qlsp)
                     .addComponent(jButton_sua_qlsp)
-                    .addComponent(jButton_xoa_qlsp)
-                    .addComponent(jButton_xuat_qlsp)))
+                    .addComponent(jButton_xoa_qlsp)))
         );
 
         jPanel_qlsp.add(jPanel8, java.awt.BorderLayout.PAGE_END);
@@ -653,10 +647,6 @@ public class QuanLyView extends SubViewer {
     private javax.swing.JButton jButton_xoa_qlsp;
     private javax.swing.JButton jButton_xoa_qltk;
     private javax.swing.JButton jButton_xoa_qlvt;
-    private javax.swing.JButton jButton_xuat_ncc;
-    private javax.swing.JButton jButton_xuat_qlnv;
-    private javax.swing.JButton jButton_xuat_qlsp;
-    private javax.swing.JButton jButton_xuat_qltk;
     private javax.swing.JComboBox<String> jComboBox_qlvt;
     private javax.swing.JFormattedTextField jFormattedTextField_ngaybd_tk;
     private javax.swing.JFormattedTextField jFormattedTextField_ngaykt_tk;

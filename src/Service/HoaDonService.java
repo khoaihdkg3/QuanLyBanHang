@@ -4,6 +4,7 @@ import Model.ChiTietHoaDon;
 import Model.HoaDon;
 import Model.NhanVien;
 import Model.SanPham;
+import Model.SanPhamTonKho;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class HoaDonService {
 
     private static HoaDonService Instance = null;
@@ -26,7 +29,7 @@ public class HoaDonService {
 
     /**
      * Thêm một hóa đơn vào cơ sở dữ liệu.
-     * @param hoadon dữ liệu HoaDon
+     * @param hoadon dữ liệu HoaDon, chỉ cần setNhanVien
      * @return True nếu thành công, False nếu thất bại.
      * @throws ClassNotFoundException
      * @throws SQLException
@@ -203,5 +206,35 @@ public class HoaDonService {
     public Date createDate(String year, String month, String day){
         return Date.valueOf(year+"-"+month+"-"+day);
     }
-
+    
+    public ArrayList<SanPhamTonKho> getSanPhamTonKhoByDate(Date ngaybatdau, Date ngayketthuc) throws SQLException, ClassNotFoundException{
+        String sql = "SELECT chitiethd.SP_MA as ma_sanpham, sum(chitiethd.CTHD_SOLUONG) as soluongban, SUM(chitiethd.CTHD_TONGTIEN) as tongtienban, date(hoadon.HD_THOIGIANLAP) as thoigian, chitietspnhap.CTSPN_SOLUONG as soluongnhap, (chitietspnhap.CTSPN_DONGIA * chitietspnhap.CTSPN_SOLUONG) as tongtienmua "
+                + "from `hoadon`,`chitiethd`,`chitietspnhap` "
+                + "where hoadon.HD_MA = chitiethd.HD_MA and date(hoadon.HD_THOIGIANLAP) = date(chitietspnhap.CTSPN_NGAYNHAP) and chitietspnhap.SP_MA = chitiethd.SP_MA and date(chitietspnhap.CTSPN_NGAYNHAP) BETWEEN ? and ? "
+                + "GROUP by thoigian, ma_sanpham";
+        PreparedStatement pStatement = Database.getInstance().prepareStatement(sql);
+        pStatement.setDate(1, ngaybatdau);
+        pStatement.setDate(2, ngayketthuc);
+        
+        ResultSet resultSet = pStatement.executeQuery();
+        ArrayList<SanPhamTonKho> sptkList = new ArrayList<>();
+        while (resultSet.next()) {
+            SanPhamTonKho sptk = ResultSet_toSanPhamTonKho(resultSet);
+            sptkList.add(sptk);
+        }
+        return sptkList;
+    }
+    public SanPhamTonKho ResultSet_toSanPhamTonKho(ResultSet rs) throws SQLException, ClassNotFoundException{
+        String ma_sp = rs.getString("ma_sanpham");
+        float slban = rs.getFloat("soluongban");
+        float tongtienban = rs.getFloat("tongtienban");
+        float slnhap = rs.getFloat("soluongnhap");
+        float tongtienmua = rs.getFloat("tongtienmua");
+        Date thoigian = rs.getDate("thoigian");
+        SanPham sanpham = SanPhamService.getInstance().getSanPhamByMaSanPham(ma_sp);
+        SanPhamTonKho sptk = new SanPhamTonKho(sanpham, thoigian, slnhap, slban, tongtienmua, tongtienban);
+        sptk.setSoLuongTon(slnhap - slban);
+        sptk.setDoanhThu(tongtienban - tongtienmua);
+        return sptk;
+    }
 }
